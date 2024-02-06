@@ -1,0 +1,4 @@
+/.env
+/.venv
+/model_cache
+/requirementsFull.txt
