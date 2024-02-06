@@ -81,7 +81,7 @@ from typing import List, Union
 from langchain.schema import AgentAction, AgentFinish, HumanMessage
 import re
 
-
+started = False
 
 def get_vectorstore():
     # from langchain.embeddings import HuggingFaceInstructEmbeddings
@@ -91,7 +91,7 @@ def get_vectorstore():
     # embeddings = HuggingFaceInstructEmbeddings(model_name = 'hkunlp/instructor-xl')
     embeddingsBgeLarge = HuggingFaceInstructEmbeddings(model_name = 'BAAI/bge-large-en-v1.5', cache_folder ="model_cache")
     print("The embedding Model is loaded")
-    vectorstore = FAISS.load_local("total_index_bge_large", embeddingsBgeLarge)
+    vectorstore = FAISS.load_local("clean_total_index_bge_large", embeddingsBgeLarge)
     print("The vectorstore is loaded")
     return vectorstore
 
@@ -104,7 +104,7 @@ def get_tools(db):
     search = SerpAPIWrapper()
 
     # from langchain.chains import RetrievalQA
-    llm = OpenAI()
+    llm = OpenAI(model="gpt-3.5-turbo-instruct")
     db_retriever = RetrievalQA.from_chain_type(
     llm=llm, chain_type="stuff", retriever=db.as_retriever()
     )
@@ -283,6 +283,8 @@ def main():
     st.header('Minebot')
     user_question = st.chat_input('Ask a question')
     if user_question:
+        global started
+        started = True
         with st.spinner(user_question):
             handle_userinput(user_question)
     # st.write(user_template, unsafe_allow_html=True)
@@ -293,6 +295,7 @@ def main():
         # pdf_docs = st.file_uploader("Upload the PDF file and click 'Process'", accept_multiple_files=True)
 
         # Give a space system vibe for activation the procees include loading embbedding model, loading FAISS local index for vectorstore, loading tools like wikipedia api, serp search api, then custom prompt templete, memory, prompt, output parser, agent, finally agent executor
+        st.header("MineBot")
         st.subheader("Activate System")
 
         if st.button('Activate'):
@@ -303,18 +306,34 @@ def main():
                 st.session_state.vectorstore = vectorstore
                 print("The vectorstore is created")
                 print(vectorstore)
-
+                st.write("Vector Store Ready!")
 
                 tools = get_tools(vectorstore)
+                st.write("Tools Ready!")
 
                 memory = get_memory()
-
+                st.write("Memory Ready!")
                 agent = get_agent(tools, memory)
 
                 # Create a conversation chain
                 st.session_state.conversation = get_conversation_chain(agent, tools, memory)
                 st.write("System is ready to answer your questions")
                 print("Start the Music")
+                
+    # global started            
+    if(started is False):         
+        st.write(bot_template.replace('{{MSG}}', """
+Welcome to MineBot!
+
+👷‍♂️🚀 Hello there! I'm MineBot, your go-to assistant for all things related to mining laws and regulations. Whether you have questions about Acts, Rules, DGMS Circulars, or any mining-related topic, I'm here to help.
+
+How can I assist you today?
+
+Feel free to ask any questions, seek guidance, or stay updated on the latest mining industry information. I'm available 24/7 to provide you with accurate and timely responses.
+
+Let's make navigating through mining regulations a breeze! What can I do for you?
+"""), unsafe_allow_html=True)
+
 
 
 
