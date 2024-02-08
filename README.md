@@ -41,9 +41,8 @@ MineBot can also be deployed using Docker. Simply build the Docker image using t
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
+This project is licensed under the [LICENSE](LICENSE). 
+Please contact the author, Siranjeevi K, for permission to use this project in commercial applications. 
+For non-commercial and educational purposes, you are free to use and modify the project, provided that proper credit is given to the author.
 
 ---
