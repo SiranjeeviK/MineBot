@@ -37,8 +37,7 @@ MineBot can also be deployed using Docker. Simply build the Docker image using t
 
 ## Contributors
 
-- [John Doe](https://github.com/johndoe)
-- [Jane Smith](https://github.com/janesmith)
+- [Siranjeevi K](https://github.com/SiranjeeviK)
 
 ## License
 
@@ -46,7 +45,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- Special thanks to the Ministry of Coal for supporting the development of MineBot.
-- Thanks to the open-source community for providing valuable tools and resources used in this project.
 
 ---
