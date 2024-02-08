@@ -21,6 +21,8 @@ MineBot is an intelligent chatbot designed to provide information and assistance
 
 To interact with MineBot, simply input your questions related to mining laws and regulations in the chat interface.
 
+![UI](UI.png)
+
 ## Getting Started
 
 To run MineBot locally, follow these steps:
