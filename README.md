@@ -30,8 +30,34 @@ To run MineBot locally, follow these steps:
 1. Clone the repository to your local machine.
 2. Install the required dependencies listed in the `requirements.txt` file.
 3. Activate the Python virtual environment (if applicable).
-4. Run the Streamlit app using the command `streamlit run main.py`.
-5. Access MineBot through your web browser at `localhost:8501`.
+4. Make sure to set up the required environment variables in a `.env` file.
+5. Run the Streamlit app using the command `streamlit run app.py`.
+6. Access MineBot through your web browser at `localhost:8501`.
+
+## Environment Variables
+
+Create a `.env` file in your project and add your own api keys for these variables.
+
+```
+HUGGINGFACEHUB_API_TOKEN = 
+OPENAI_API_KEY = 
+SERPAPI_API_KEY = 
+```
+
+## Troubleshooting
+
+### SWIG Error when installing faiss-cpu
+
+If you encounter an error related to SWIG when installing the `faiss-cpu` package, you can try the following steps to resolve the issue:
+
+Install the `swig` package using the following command:
+
+```bash
+sudo apt-get update
+sudo apt-get install swig
+```
+
+For windows, you can download the swig executable from the [official website](http://www.swig.org/download.html).
 
 ## Deployment
 
